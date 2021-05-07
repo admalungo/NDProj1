@@ -54,7 +54,9 @@ change sku and size; dev/test; free
 copy url to see site 
 
 deployement is through GitHub
-
+deployment on the left side; select GitHub,
+GitHub actions
+add or override workflow definitions
 
 
 6. Add logging for whether users successfully or unsuccessfully logged in.
