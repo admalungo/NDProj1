@@ -69,14 +69,13 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             # Added by me
-            app.logger.info('Invalid login attempt - info')
-            app.logger.warning('Invalid login attempt - warning')
-            app.logger.error('Invalid login attempt - error')
-            app.logger.critical('Invalid login attempt - critical')
+            app.logger.critical('Invalid login attempt')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         # Added by me
-        app.logger.info('User logged in successfully')
+        app.logger.warning('User logged in successfully - warning')
+        app.logger.error('User logged in successfully - error')
+        app.logger.critical('User logged in successfully - critical')
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
