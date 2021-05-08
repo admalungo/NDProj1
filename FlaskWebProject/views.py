@@ -72,16 +72,15 @@ def login():
             app.logger.critical('Invalid login attempt')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        # Added by me
-        #app.logger.info('User logged in successfully - info')
-        #app.logger.warning('User logged in successfully - warning')
-        #app.logger.error('User logged in successfully - error')
-        #app.logger.critical('User logged in successfully - critical')
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
+    app.logger.info('User logged in successfully - info')
+    app.logger.warning('User logged in successfully - warning')
+    app.logger.error('User logged in successfully - error')
+    app.logger.critical('User logged in successfully - critical')
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
     return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
 
@@ -105,10 +104,6 @@ def authorized():
         # Note: In a real app, we'd use the 'name' property from session["user"] below
         # Here, we'll use the admin username for anyone who is authenticated by MS
         user = User.query.filter_by(username="admin").first()
-        app.logger.info('admin user logged in successfully - info')
-        app.logger.warning('admin user logged in successfully - warning')
-        app.logger.error('admin user logged in successfully - error')
-        app.logger.critical('admin user logged in successfully - critical')
         login_user(user)
         _save_cache(cache)
     return redirect(url_for('home'))
