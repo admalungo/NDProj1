@@ -77,10 +77,7 @@ def login():
             next_page = url_for('home')
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
-    app.logger.info('User logged in successfully - info')
-    app.logger.warning('User logged in successfully - warning')
-    app.logger.error('User logged in successfully - error')
-    app.logger.critical('User logged in successfully - critical')
+    app.logger.critical('admin user logged in successfully')
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
     return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
 
