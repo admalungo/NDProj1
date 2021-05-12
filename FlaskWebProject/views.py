@@ -60,7 +60,6 @@ def post(id):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    app.logger.info('LOGIN FUNCTION WAS CALLED!')
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -77,7 +76,6 @@ def login():
             next_page = url_for('home')
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
-    app.logger.critical('admin user logged in successfully')
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
     return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
 

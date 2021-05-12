@@ -58,7 +58,6 @@ deployment on the left side; select GitHub,
 GitHub actions
 add or override workflow definitions
 
-
 6. Add logging for whether users successfully or unsuccessfully logged in.
     - This will require completing TODOs in `__init__.py`, as well as adding logging where desired in `views.py`.
 7. To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
